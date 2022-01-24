@@ -481,8 +481,54 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  let flag = true;
+  let output;
+
+  function check(arr) {
+    const result = arr.join('');
+    if (result === 'XXX') {
+      output = 'X';
+      flag = false;
+    } else if (result === '000') {
+      output = '0';
+      flag = false;
+    }
+  }
+
+  function checkHorizontal() {
+    position.forEach((el) => {
+      if (flag) {
+        check(el);
+      }
+    });
+  }
+
+  function checkVertical() {
+    for (let i = 0; i < position.length; i += 1) {
+      const result = [];
+      for (let j = 0; j < position.length; j += 1) {
+        result.push(position[j][i]);
+      }
+
+      if (flag) {
+        check(result);
+      }
+    }
+  }
+
+  function checkCenter() {
+    const lineLeft = [].concat(position[0][0]).concat(position[1][1]).concat(position[2][2]);
+    const lineRight = [].concat(position[0][2]).concat(position[1][1]).concat(position[2][0]);
+    check(lineLeft);
+    check(lineRight);
+  }
+
+  checkHorizontal();
+  checkVertical();
+  checkCenter();
+
+  return output;
 }
 
 

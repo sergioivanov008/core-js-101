@@ -432,29 +432,22 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-// function sortCitiesArray(arr) {
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
-  // function sortFuncCountry(a, b) {
-  //   if (a.country > b.country) {
-  //     return 1;
-  //   }
-  //   if (a.country < b.country) {
-  //     return -1;
-  //   }
-  //   return 0;
-  // }
-  // function sortFuncCity(a, b) {
-  //   if (a.city > b.city) {
-  //     return 1;
-  //   }
-  //   if (a.city < b.city) {
-  //     return -1;
-  //   }
-  //   return 0;
-  // }
+function sortCitiesArray(arr) {
+  function sortFunc(a, b, value) {
+    if (a[value] > b[value]) {
+      return 1;
+    }
+    if (a[value] < b[value]) {
+      return -1;
+    }
+    return 0;
+  }
 
-  // return arr.sort((a, b) => sortFuncCountry(a, b)).sort((a, b) => sortFuncCity(a, b));
+  function sortFuncCity(a, b, value) {
+    return a.country === b.country ? sortFunc(a, b, value) : 0;
+  }
+
+  return arr.sort((a, b) => sortFunc(a, b, 'country')).sort((a, b) => sortFuncCity(a, b, 'city'));
 }
 
 /**
@@ -557,12 +550,34 @@ function distinct(arr) {
 // function group(array, keySelector, valueSelector) {
 function group(/* array, keySelector, valueSelector */) {
   throw new Error('Not implemented');
-  // const tempArr = [];
-  // const tempArr2 = array.map((el) => {
-  //   if (!tempArr[keySelector])
-  // });
-}
+  // const tempMap = new Map();
+  // const keys = Array.from(new Set(array.map(keySelector)));
+  // const values = array.map(valueSelector);
 
+  // console.log('keys:', keys, 'values:', values);
+
+  // keys.map((el, index) => {
+
+  // });
+
+  // array.map((el) => tempMap.set(el.country, []));
+  // // const twemp = Object.keys(tempMap);
+  // // console.log('test');
+
+  // return tempMap;
+}
+// const keySelector = (item) => item.country;
+// const valueSelector = (item) => item.city;
+// const array = [
+//   { country: 'Belarus', city: 'Brest' },
+//   { country: 'Russia', city: 'Omsk' },
+//   { country: 'Russia', city: 'Samara' },
+//   { country: 'Belarus', city: 'Grodno' },
+//   { country: 'Belarus', city: 'Minsk' },
+//   { country: 'Poland', city: 'Lodz' },
+// ];
+
+// console.log(group(array, keySelector, valueSelector));
 
 /**
  * Projects each element of the specified array to a sequence
