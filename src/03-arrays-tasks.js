@@ -547,37 +547,25 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-// function group(array, keySelector, valueSelector) {
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
-  // const tempMap = new Map();
-  // const keys = Array.from(new Set(array.map(keySelector)));
-  // const values = array.map(valueSelector);
+function group(array, keySelector, valueSelector) {
+  const tempObj = {};
 
-  // console.log('keys:', keys, 'values:', values);
+  array.map((el) => {
+    const key = keySelector(el);
+    const value = valueSelector(el);
 
-  // keys.map((el, index) => {
+    if (!tempObj[key]) {
+      tempObj[key] = [value];
+    } else {
+      tempObj[key].push(value);
+    }
+    return null;
+  });
 
-  // });
+  const temp = Object.entries(tempObj);
 
-  // array.map((el) => tempMap.set(el.country, []));
-  // // const twemp = Object.keys(tempMap);
-  // // console.log('test');
-
-  // return tempMap;
+  return new Map(temp);
 }
-// const keySelector = (item) => item.country;
-// const valueSelector = (item) => item.city;
-// const array = [
-//   { country: 'Belarus', city: 'Brest' },
-//   { country: 'Russia', city: 'Omsk' },
-//   { country: 'Russia', city: 'Samara' },
-//   { country: 'Belarus', city: 'Grodno' },
-//   { country: 'Belarus', city: 'Minsk' },
-//   { country: 'Poland', city: 'Lodz' },
-// ];
-
-// console.log(group(array, keySelector, valueSelector));
 
 /**
  * Projects each element of the specified array to a sequence
